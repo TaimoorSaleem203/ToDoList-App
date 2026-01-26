@@ -4,7 +4,6 @@ import toDoBar from "../assets/ToDoBar.png"
 const ToDoBar = () => {
 
 
-
     return (
         <>
         <div className="relative w-full flex justify-center">

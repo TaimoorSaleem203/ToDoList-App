@@ -3,15 +3,23 @@ import mainList from "../assets/mainBar.png"
 
 const ToDoList = ({ task, setTask, inputValue, setInputValue }) => {
 
-    const [done, setDone] = useState(true)
+    const [done, setDone] = useState(false)
 
     const handleDelete = (indx) => {
         setTask(task.filter((item, index) => index !== indx))
     }
 
-    const handleDone = (e) => {
-        setDone(!done)
-        return done ? e.target.className = "line-through" : e.target.className = "no-underline"
+    const handleDone = (curTask) => {
+        const updatedTask = task.map((item,index)=>{
+            if(item.task == curTask){
+                return {...item,completed:!item.completed}
+            }else{
+                return item
+            }
+        })
+
+        setTask(updatedTask)
+        
     }
 
 
@@ -27,10 +35,10 @@ const ToDoList = ({ task, setTask, inputValue, setInputValue }) => {
                     {task.map((item, indx) => {
                         return (
                             <li className="bg-white/70 rounded-lg p-2 flex items-center justify-between shadow-md">
-                                <p><span className="font-medium">{indx + 1}. </span>{item}</p>
+                                <p>{indx + 1}. <span className={`${item.completed? "line-through":""}`}>{item.task}</span></p>
                                 <div className="flex items-center font-semibold gap-3">
-                                    <i onClick={(e)=>handleDone(e)} class="ri-check-line cursor-pointer transition-color duration-150 active:scale-95 hover:text-green-700"></i>
-                                    <i onClick={() => { handleDelete(indx) }} className="ri-delete-bin-line cursor-pointer transition-color duration-150 active:scale-95 hover:text-red-700"></i>
+                                    <i onClick={()=>{handleDone(item.task)}} class={`ri-check-line cursor-pointer transition-color duration-150 active:scale-95 hover:text-green-700`}></i>
+                                    <i onClick={()=>{handleDelete(indx)}} className="ri-delete-bin-line cursor-pointer transition-color duration-150 active:scale-95 hover:text-red-700"></i>
                                 </div>
                             </li>
                         )

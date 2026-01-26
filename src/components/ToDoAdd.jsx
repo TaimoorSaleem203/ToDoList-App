@@ -11,13 +11,13 @@ const ToDoAdd = ({task,setTask,inputValue,setInputValue}) => {
             return
         }
 
-        setTask(prev=>[...prev,inputValue])
+        setTask(prev=>[...prev,{"id":Date.now(),"task":inputValue,"completed":false}])
+        
         setInputValue("")
     }
 
     const handleClear = () => {
-        setTask([]) 
-        return
+        setTask("") 
     }
 
     return (
