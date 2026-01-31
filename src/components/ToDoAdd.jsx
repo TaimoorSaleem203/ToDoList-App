@@ -1,24 +1,32 @@
+
 import circleAdd from "../assets/circle.png"
+import { setLocalStorageToDoData } from "./toDoLocalStorage"
 
 const ToDoAdd = ({task,setTask,inputValue,setInputValue}) => {
 
-    const handleAdd = (e) =>{
+    const handleAdd = (e) => {
         e.preventDefault()
 
         if(!inputValue) return
-        if(task.includes(inputValue)){
-            setInputValue("")
-            return
+        for(let item of task){
+            if(item.task==inputValue.toLowerCase() || item.task==inputValue.toUpperCase()){
+                setInputValue("")
+                return
+            }
         }
 
         setTask(prev=>[...prev,{"id":Date.now(),"task":inputValue,"completed":false}])
         
+        
         setInputValue("")
     }
 
+
     const handleClear = () => {
-        setTask("") 
+        setTask([]) 
     }
+
+    setLocalStorageToDoData(task)
 
     return (
         <>
