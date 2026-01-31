@@ -10,7 +10,7 @@ const App = () => {
     const [inputValue,setInputValue] = useState("")
     
     return (
-        <section className="font-sans min-h-screen mx-auto flex items-center justify-center bg-gray-100 px-4">
+        <section className={`bg-[url('../src/assets/mainBar.png')] bg-center bg-no-repeat bg-cover font-sans min-h-screen mx-auto flex items-center justify-center bg-gray-100 px-4`}>
             <div className="w-full max-w-sm flex flex-col items-center gap-5 relative">
                 <ToDoBar />
 
